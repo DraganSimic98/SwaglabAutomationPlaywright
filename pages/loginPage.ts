@@ -7,6 +7,7 @@ class LoginPage {
     loginBtn: Locator;
     lockedOutErrorMsg: Locator;
     productPicture: Locator;
+    
 
     constructor(page: Page) {
         this.page = page;
@@ -15,6 +16,7 @@ class LoginPage {
         this.loginBtn = page.locator('//input[@type = "submit"]');
         this.lockedOutErrorMsg = page.locator('//h3[@data-test = "error"]');
         this.productPicture = page.locator('//img[@class="inventory_item_img"]');
+        
     }
 
     async loginWithAnyTypeOfUser(username: string, password: string){
