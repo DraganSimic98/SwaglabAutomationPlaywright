@@ -1,7 +1,6 @@
 import {Page, Locator} from "@playwright/test"
 
 export class ProductsPage {
-
     page: Page;
     firstProduct: Locator;
 
