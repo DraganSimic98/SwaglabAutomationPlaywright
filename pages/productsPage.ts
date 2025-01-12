@@ -8,8 +8,5 @@ export class ProductsPage {
 constructor(page: Page){
     this.page = page;
     this.firstProduct = page.locator('//div[text() = "Sauce Labs Backpack"]');
-}
-
-
-
+    }
 }

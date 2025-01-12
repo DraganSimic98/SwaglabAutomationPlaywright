@@ -1,5 +1,5 @@
 import{test, expect} from "@playwright/test";
-import LoginPage from "../pages/loginPage";
+import {LoginPage} from "../pages/loginPage";
 import { ProductsPage } from "../pages/productsPage";
 import { SingleProductPage } from "../pages/singleProductPage";
 
@@ -28,10 +28,7 @@ test.describe('Log in', () =>{
     test('Login with problem user', async ({}) => {
         await loginpage.loginWithAnyTypeOfUser('problem_user', 'secret_sauce');
         await productPage.firstProduct.click();
-        await expect(singleProductPage.productName).not.toHaveText('Sauce Labs Backpack');
-
-        
+        await expect(singleProductPage.productName).not.toHaveText('Sauce Labs Backpack');      
     });
-    
     
 })

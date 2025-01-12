@@ -7,6 +7,6 @@ export class SingleProductPage{
 
     constructor(page:Page){
         this.page = page;
-        this.productName = page.locator('//div[@class="inventory_details_name large_size"]');
+        this.productName = page.locator('//div[@class="inventory_details_name"]');
     }
  }
