@@ -33,32 +33,27 @@ constructor(page: Page){
     }
 
     async sortByPriceLoHI(){
-        const productPrices = await this.itemListByPrice.allTextContents();
+        const productPrices = await this.itemListByPrice.allTextContents();       
         await this.page.selectOption('.product_sort_container', {value: 'lohi'});
-       
         const newProductPrices = await this.itemListByPrice.allTextContents();
         
         const sortedPrices =  productPrices.sort((a, b) => {
             const priceA = parseFloat(a.replace('$', ''));
             const priceB = parseFloat(b.replace('$', ''));
             return priceA-priceB;
-        })        
-        console.log(newProductPrices);
-        console.log(sortedPrices);
-  
+        });
+
         expect(newProductPrices).toEqual(sortedPrices);
     }
 
     async sortByPriceHiLo(){
         const productPrice = await this.itemListByPrice.allTextContents();
-
         await this.page.selectOption('.product_sort_container', {value: 'hilo'});
         const newProductPrice = await this.itemListByPrice.allTextContents();
 
         const sortedPrices = productPrice.sort((a, b) => {
             const priceA = parseFloat(a.replace('$', ''));
             const priceB = parseFloat(b.replace('$', ''));
-
             return priceA-priceB;
         }).reverse();
         
