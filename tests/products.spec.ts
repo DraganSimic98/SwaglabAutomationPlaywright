@@ -20,6 +20,14 @@ test.describe('Products', () => {
 
     test('Reverse sorting check', async ({}) => {
         await productPage.sortItemsReverse();
-    })
-   
-})
+    });
+
+    test('Sorting by price', async ({}) => {
+        await productPage.sortByPriceLoHI();
+    });
+    
+    test('Reverce sorting price', async ({}) => {
+        await productPage.sortByPriceHiLo();
+    });
+    
+});
