@@ -18,7 +18,7 @@ constructor(page: Page){
     
     async sortItems(){
         const productNames = await this.itemListByName.allTextContents();
-        const sortedNames = [...productNames].sort();
+        const sortedNames = productNames.sort();
         
         expect(productNames).toEqual(sortedNames);
     }
@@ -27,7 +27,7 @@ constructor(page: Page){
         const productName = await this.itemListByName.allTextContents();
         await this.page.selectOption('.product_sort_container', {value: 'za'})
         const newProducNames = await this.itemListByName.allTextContents();      
-        const sortedNames = [...productName].sort().reverse();
+        const sortedNames = productName.sort().reverse();
         
         expect(newProducNames).toEqual(sortedNames);
     }
