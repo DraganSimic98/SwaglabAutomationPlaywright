@@ -12,11 +12,14 @@ test.describe('Products', () => {
         productPage = new ProductsPage(page);
         await loginpage.navigation();
         await loginpage.loginWithAnyTypeOfUser('standard_user', password);
-    })
+    });
 
-    test('Are the product sorted', async ({ page }) => {
-      
-       
+    test('Are the product sorted', async ({}) => {
+      await productPage.sortItems();
+    });
+
+    test('Reverse sorting check', async ({}) => {
+        await productPage.sortItemsReverse();
     })
-    
+   
 })
