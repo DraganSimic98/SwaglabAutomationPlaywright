@@ -14,20 +14,17 @@ test.describe('Products', () => {
         await loginpage.loginWithAnyTypeOfUser('standard_user', password);
     });
 
-    test('Are the product sorted', async ({}) => {
-      await productPage.sortItems();
+    test('Sorting by name', async ({}) => {
+      await productPage.sortByName('az');
+      await productPage.sortByName('za');
     });
 
-    test('Reverse sorting check', async ({}) => {
-        await productPage.sortItemsReverse();
+    test('Sorting by price high to low', async ({}) => {      
+        await productPage.sortByPrice('hilo');
     });
 
-    test('Sorting by price', async ({}) => {
-        await productPage.sortByPriceLoHI();
-    });
-    
-    test('Reverce sorting price', async ({}) => {
-        await productPage.sortByPriceHiLo();
+    test('Sorting by price low to high', async ({}) => {
+        await productPage.sortByPrice('lohi');  
     });
     
 });

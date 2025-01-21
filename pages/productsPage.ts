@@ -1,11 +1,17 @@
 import {Page, Locator, expect} from "@playwright/test"
 
+type NameValue =  "az" | "za";
+type PriceValue =  'lohi' | 'hilo';
+type DataValue = 'itemListByName' | 'itemListByPrice';
+
 export class ProductsPage {
     page: Page;
     firstProduct: Locator;
     sortBtn: Locator;
     itemListByName: Locator;
     itemListByPrice: Locator;
+    originalData: string[];
+    sortFn: (desc?: boolean) => (a: string, b: string) => number;
 
 constructor(page: Page){
     this.page = page;
@@ -13,50 +19,43 @@ constructor(page: Page){
     this.sortBtn = page.locator('//select[@class = "product_sort_container"]');
     this.itemListByName = page.locator('//div[@class = "inventory_item_name"]');
     this.itemListByPrice = page.locator('//div[@class = "inventory_item_price"]');
-
-    }
+    this.originalData = [];
     
-    async sortItems(){
-        const productNames = await this.itemListByName.allTextContents();
-        const sortedNames = productNames.sort();
-        
-        expect(productNames).toEqual(sortedNames);
+    this.sortFn = (desc: boolean = false) => (a: string, b: string) => {
+            const priceA = parseFloat(a.replace('$', ''));
+            const priceB = parseFloat(b.replace('$', ''));
+            return !desc ? priceA - priceB : priceB - priceA;
+        }
     }
 
-    async sortItemsReverse(){
-        const productName = await this.itemListByName.allTextContents();
-        await this.page.selectOption('.product_sort_container', {value: 'za'})
+    async prepareData<T extends string>(data: DataValue, value: T) {
+        this.originalData = await this[data].allTextContents();
+        await this.page.selectOption('.product_sort_container', {value});
+    }
+
+    async sortByName(value: NameValue){
+        this.prepareData<NameValue>('itemListByName', value);
+
         const newProducNames = await this.itemListByName.allTextContents();      
-        const sortedNames = productName.sort().reverse();
-        
-        expect(newProducNames).toEqual(sortedNames);
+       
+       const names = {
+        'az': [...this.originalData.sort()],
+        'za': [...this.originalData.sort().reverse()],
+       }
+       
+        expect(newProducNames).toEqual(names[value]);
     }
 
-    async sortByPriceLoHI(){
-        const productPrices = await this.itemListByPrice.allTextContents();       
-        await this.page.selectOption('.product_sort_container', {value: 'lohi'});
+    async sortByPrice(value: PriceValue){
+        this.prepareData<PriceValue>('itemListByPrice', value);
+
         const newProductPrices = await this.itemListByPrice.allTextContents();
+
+        const values = {
+            'lohi': [...this.originalData.sort(this.sortFn())],
+            'hilo': [...this.originalData.sort(this.sortFn(true))]
+        }
         
-        const sortedPrices =  productPrices.sort((a, b) => {
-            const priceA = parseFloat(a.replace('$', ''));
-            const priceB = parseFloat(b.replace('$', ''));
-            return priceA-priceB;
-        });
-
-        expect(newProductPrices).toEqual(sortedPrices);
-    }
-
-    async sortByPriceHiLo(){
-        const productPrice = await this.itemListByPrice.allTextContents();
-        await this.page.selectOption('.product_sort_container', {value: 'hilo'});
-        const newProductPrice = await this.itemListByPrice.allTextContents();
-
-        const sortedPrices = productPrice.sort((a, b) => {
-            const priceA = parseFloat(a.replace('$', ''));
-            const priceB = parseFloat(b.replace('$', ''));
-            return priceA-priceB;
-        }).reverse();
-        
-        expect(newProductPrice).toEqual(sortedPrices);
+        expect(newProductPrices).toEqual(values[value]);
     }
 }
