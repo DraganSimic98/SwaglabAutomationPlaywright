@@ -14,16 +14,19 @@ test.describe('Products', () => {
         await loginpage.loginWithAnyTypeOfUser('standard_user', password);
     });
 
-    test('Sorting by name', async ({}) => {
+    test('Sorting by name az', async () => {
       await productPage.sortByName('az');
-      await productPage.sortByName('za');
     });
 
-    test('Sorting by price high to low', async ({}) => {      
+    test('Sort by name za', async () => {
+        await productPage.sortByName('za');
+    })
+
+    test('Sorting by price high to low', async () => {      
         await productPage.sortByPrice('hilo');
     });
 
-    test('Sorting by price low to high', async ({}) => {
+    test('Sorting by price low to high', async () => {
         await productPage.sortByPrice('lohi');  
     });
     

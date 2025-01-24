@@ -34,7 +34,7 @@ constructor(page: Page){
     }
 
     async sortByName(value: NameValue){
-        this.prepareData<NameValue>('itemListByName', value);
+         await this.prepareData<NameValue>('itemListByName', value);
 
         const newProducNames = await this.itemListByName.allTextContents();      
        
@@ -47,7 +47,7 @@ constructor(page: Page){
     }
 
     async sortByPrice(value: PriceValue){
-        this.prepareData<PriceValue>('itemListByPrice', value);
+        await this.prepareData<PriceValue>('itemListByPrice', value);
 
         const newProductPrices = await this.itemListByPrice.allTextContents();
 
