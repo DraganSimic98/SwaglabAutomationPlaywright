@@ -29,5 +29,12 @@ test.describe('Products', () => {
     test('Sorting by price low to high', async () => {
         await productPage.sortByPrice('lohi');  
     });
+
+    test('Close left side menu', async () => {
+        await productPage.btn_burger.click();
+        await expect(productPage.left_menu).toBeVisible();
+        await productPage.btn_cross.click();
+        await expect(productPage.left_menu).not.toBeInViewport();
+    });
     
 });

@@ -7,18 +7,25 @@ type DataValue = 'itemListByName' | 'itemListByPrice';
 export class ProductsPage {
     page: Page;
     firstProduct: Locator;
-    sortBtn: Locator;
     itemListByName: Locator;
     itemListByPrice: Locator;
     originalData: string[];
     sortFn: (desc?: boolean) => (a: string, b: string) => number;
+    btn_burger: Locator;
+    btn_sort: Locator;
+    btn_cross: Locator;
+    left_menu: Locator;
 
 constructor(page: Page){
     this.page = page;
     this.firstProduct = page.locator('//div[text() = "Sauce Labs Backpack"]');
-    this.sortBtn = page.locator('//select[@class = "product_sort_container"]');
+    this.btn_sort = page.locator('//select[@class = "product_sort_container"]');
+    this.btn_burger = page.locator('//div[@class = "bm-burger-button"]');
+    this.btn_cross = page.locator('//div[@class = "bm-cross-button"]');
+    this.left_menu = page.locator('//div[@class = "bm-menu"]');
     this.itemListByName = page.locator('//div[@class = "inventory_item_name"]');
     this.itemListByPrice = page.locator('//div[@class = "inventory_item_price"]');
+    
     this.originalData = [];
     
     this.sortFn = (desc: boolean = false) => (a: string, b: string) => {
@@ -58,4 +65,5 @@ constructor(page: Page){
         
         expect(newProductPrices).toEqual(values[value]);
     }
+
 }
