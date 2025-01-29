@@ -30,11 +30,19 @@ test.describe('Products', () => {
         await productPage.sortByPrice('lohi');  
     });
 
-    test('Close left side menu', async () => {
+    test('Close left side menu clicking on X button', async () => {
         await productPage.btn_burger.click();
         await expect(productPage.left_menu).toBeVisible();
         await productPage.btn_cross.click();
         await expect(productPage.left_menu).not.toBeInViewport();
+    });
+
+    test('Close left menu clicking out of left menu', async({page}) =>{
+        await productPage.btn_burger.click();
+        await expect(productPage.left_menu).toBeVisible();
+        await page.locator("body").click({position: {x: 100, y: 50}});
+        await expect(productPage.left_menu).not.toBeInViewport(); 
+
     });
     
 });
