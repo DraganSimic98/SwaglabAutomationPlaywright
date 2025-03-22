@@ -17,9 +17,8 @@ test.describe('Products', () => {
     test.afterEach(async () => {
         await productPage.logOut();
         await productPage.verifyLogOut();
-    })
+    });
     
-
     test('Sorting by name az', async () => {
       await productPage.sortByName('az');
     });
