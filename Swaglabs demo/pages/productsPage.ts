@@ -19,6 +19,7 @@ export class ProductsPage {
     productName: Locator;
     itemNamesList: Locator;
     btn_shopingCart: Locator;
+    btn_logout: Locator;
 
 constructor(page: Page){
     this.page = page;
@@ -33,6 +34,7 @@ constructor(page: Page){
     this.btnBack = this.page.locator('//button[@class = "inventory_details_back_button"]');
     this.productName = this.page.locator('//div[@class = "inventory_details_name"]');
     this.btn_shopingCart = this.page.locator('#shopping_cart_container');
+    this.btn_logout = this.page.locator('[id="logout_sidebar_link"]')
     
     this.originalData = [];
     
@@ -84,6 +86,41 @@ constructor(page: Page){
             await this.btnBack.click();
             await expect(this.page).toHaveURL(/.*v1/);       
         }
+    }
+
+    async logOut(){
+        await this.openLeftMenu();
+        await this.verifyOpenMenu();
+        await this.btn_logout.click();
+    }
+
+    async verifyLogOut(){
+        await expect(this.page).toHaveURL(/.*index/)
+    }
+
+    async openLeftMenu(){
+        console.log("productsPage, openLeftMenu()");
+        await this.btn_burger.click();
+    }
+
+    async verifyOpenMenu(){
+        console.log("productsPage, verifyOpenMenu()");
+        await expect(this.left_menu).toBeVisible();
+    }
+
+    async closeLeftMenu(option: 'cross' | 'randomClick'){
+        console.log("productsPage, closeLeftMenu()");
+        if(option === 'cross'){
+            await this.btn_cross.click();
+        }
+        else{
+            await this.btn_sort.click({force: true})
+        }
+    }
+ 
+    async verifyClosedMenu(){
+        console.log("productsPage, verifyClosedMenu()");
+        await expect(this.left_menu).not.toBeInViewport();
     }
 
 }

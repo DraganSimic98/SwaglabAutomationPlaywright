@@ -14,13 +14,19 @@ test.describe('Products', () => {
         await loginpage.loginWithAnyTypeOfUser('standard_user', password);
     });
 
+    test.afterEach(async () => {
+        await productPage.logOut();
+        await productPage.verifyLogOut();
+    })
+    
+
     test('Sorting by name az', async () => {
       await productPage.sortByName('az');
     });
 
     test('Sort by name za', async () => {
         await productPage.sortByName('za');
-    })
+    });
 
     test('Sorting by price high to low', async () => {      
         await productPage.sortByPrice('hilo');
@@ -31,22 +37,20 @@ test.describe('Products', () => {
     });
 
     test('Close left side menu clicking on X button', async () => {
-        await productPage.btn_burger.click();
-        await expect(productPage.left_menu).toBeVisible();
-        await productPage.btn_cross.click();
-        await expect(productPage.left_menu).not.toBeInViewport();
+        await productPage.openLeftMenu();
+        await productPage.verifyOpenMenu();
+        await productPage.closeLeftMenu('cross');
+        await productPage.verifyClosedMenu();
     });
 
     test('Close left menu clicking out of left menu', async({page}) =>{
-        await productPage.btn_burger.click();
-        await expect(productPage.left_menu).toBeVisible();
-        await page.locator("body").click({position: {x: 100, y: 50}});
-        await expect(productPage.left_menu).not.toBeInViewport(); 
-
+        await productPage.openLeftMenu();
+        await productPage.verifyOpenMenu();
+        await productPage.closeLeftMenu('randomClick');
+        await productPage.verifyClosedMenu();
     });
 
-    test('Test', async () => {
+    test('Open all products', async () => {
         await productPage.openProduct();
-    })
-
+    });   
 });

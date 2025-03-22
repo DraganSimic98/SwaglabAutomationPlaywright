@@ -21,4 +21,4 @@ test.describe('Cart', () => {
         await cartPage.verifyPageLink();
         await cartPage.verifyPageTitle();
     });    
-})
+});
