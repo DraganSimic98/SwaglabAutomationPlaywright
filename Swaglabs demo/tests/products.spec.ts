@@ -44,5 +44,9 @@ test.describe('Products', () => {
         await expect(productPage.left_menu).not.toBeInViewport(); 
 
     });
-    
+
+    test('Test', async () => {
+        await productPage.openProduct();
+    })
+
 });

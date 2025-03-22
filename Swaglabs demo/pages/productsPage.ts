@@ -15,6 +15,10 @@ export class ProductsPage {
     btn_sort: Locator;
     btn_cross: Locator;
     left_menu: Locator;
+    btnBack: Locator;
+    productName: Locator;
+    itemNamesList: Locator;
+    btn_shopingCart: Locator;
 
 constructor(page: Page){
     this.page = page;
@@ -25,6 +29,10 @@ constructor(page: Page){
     this.left_menu = page.locator('//div[@class = "bm-menu"]');
     this.itemListByName = page.locator('//div[@class = "inventory_item_name"]');
     this.itemListByPrice = page.locator('//div[@class = "inventory_item_price"]');
+    this.itemNamesList = page.locator('//div[@class = "inventory_item_name"]');
+    this.btnBack = this.page.locator('//button[@class = "inventory_details_back_button"]');
+    this.productName = this.page.locator('//div[@class = "inventory_details_name"]');
+    this.btn_shopingCart = this.page.locator('#shopping_cart_container');
     
     this.originalData = [];
     
@@ -64,6 +72,18 @@ constructor(page: Page){
         }
         
         expect(newProductPrices).toEqual(values[value]);
+    }
+
+    async openProduct(){
+        const singleItemName = await this.itemNamesList.allTextContents();
+
+        for(const name of singleItemName){
+            const firstProduct = this.page.locator(`//div[contains(text(), '${name}')]`);
+            await firstProduct.click();
+            await expect(this.productName).toHaveText(name);         
+            await this.btnBack.click();
+            await expect(this.page).toHaveURL(/.*v1/);       
+        }
     }
 
 }
