@@ -122,5 +122,4 @@ constructor(page: Page){
         console.log("productsPage, verifyClosedMenu()");
         await expect(this.left_menu).not.toBeInViewport();
     }
-
 }

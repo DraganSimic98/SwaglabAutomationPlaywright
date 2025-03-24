@@ -16,7 +16,8 @@ test.describe('Cart', () => {
             await loginpage.navigation();
             await loginpage.loginWithAnyTypeOfUser('standard_user', password);
         });
-    test('Open cart and verify title', async () => {
+    
+        test('Open cart and verify title', async () => {
         await productPage.btn_shopingCart.click();
         await cartPage.verifyPageLink();
         await cartPage.verifyPageTitle();

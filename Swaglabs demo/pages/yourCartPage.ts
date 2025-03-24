@@ -26,5 +26,4 @@ export class YourCartPage{
     async verifyPageTitle(){
         await expect(this.lbl_subheader).toHaveText("Your Cart");
     }
-
 }
