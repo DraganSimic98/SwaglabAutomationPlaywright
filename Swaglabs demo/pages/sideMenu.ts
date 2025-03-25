@@ -2,13 +2,14 @@ import {Page, Locator, expect} from '@playwright/test'
 
 export class SideMenu{
     
-    page: Page;
-    btn_logout: Locator;
-    btn_burger: Locator;
-    btn_sort: Locator;
-    btn_cross: Locator;
-    left_menu: Locator;
-    btn_allItems: Locator;
+    readonly page: Page;
+    readonly btn_logout: Locator;
+    readonly btn_burger: Locator;
+    readonly btn_sort: Locator;
+    readonly btn_cross: Locator;
+    readonly left_menu: Locator;
+    readonly btn_allItems: Locator;
+    readonly btn_about: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -18,15 +19,18 @@ export class SideMenu{
         this.btn_cross = page.locator('//div[@class="bm-cross-button"]');
         this.btn_allItems = page.locator('#inventory_sidebar_link');
         this.left_menu = page.locator('//div[@class="bm-menu"]');
+        this.btn_about = page.locator('#about_sidebar_link');
     }
 
     async logOut(){
+        console.log("Side Menu, logOut()");
         await this.openLeftMenu();
         await this.verifyOpenMenu();
         await this.btn_logout.click();
     }
     
     async verifyLogOut(){
+        console.log("Side Menu, verifyLogOut()");
         await expect(this.page).toHaveURL(/.*index/);
     }
     
@@ -56,8 +60,18 @@ export class SideMenu{
     }
 
     async returnToAllItems(){
+        console.log("Side Menu, returnToAllItems()");
         await this.openLeftMenu();
         await this.verifyOpenMenu();
         await this.btn_allItems.click();
+    }
+
+    async goToAboutAndVerify(){
+        console.log("Side Menu, goToAbout()");
+        await this.openLeftMenu();
+        await this.verifyOpenMenu();
+        await this.btn_about.click();
+        
+        await expect(this.page).toHaveURL("https://saucelabs.com/");
     }
 }

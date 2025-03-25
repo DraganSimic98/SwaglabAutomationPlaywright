@@ -1,11 +1,11 @@
 import {Page, Locator, expect} from'@playwright/test';
 
 export class YourCartPage{
-    page: Page;
-    btn_checkout: Locator;
-    btn_remove: Locator;
-    btn_continueShopping: Locator;
-    lbl_subheader: Locator;
+    readonly page: Page;
+    readonly btn_checkout: Locator;
+    readonly btn_remove: Locator;
+    readonly btn_continueShopping: Locator;
+    readonly lbl_subheader: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -16,14 +16,17 @@ export class YourCartPage{
     }
 
     async navigation(){
+        console.log("YourCartPage, navigation()");
         await this.page.goto("https://www.saucedemo.com/v1/cart.html");
     }
 
     async verifyPageLink(){
+        console.log("YourCartPage, verifyPageLink()");
         await expect(this.page).toHaveURL(/.*cart/);
     }
 
     async verifyPageTitle(){
+        console.log("YourCartPage, verifyPageTitle()");
         await expect(this.lbl_subheader).toHaveText("Your Cart");
     }
 }

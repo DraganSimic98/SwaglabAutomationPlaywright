@@ -8,6 +8,7 @@ test.describe('Products', () => {
     let productPage: ProductsPage;
     let sideMenu: SideMenu;
     let password = 'secret_sauce';
+    let skipAfterEach = false;
 
     test.beforeEach(async ({page})=>{
         loginpage = new LoginPage(page);
@@ -18,6 +19,7 @@ test.describe('Products', () => {
     });
 
     test.afterEach(async () => {
+        if(skipAfterEach) return;
         await sideMenu.logOut();
         await sideMenu.verifyLogOut();
     });
@@ -49,10 +51,15 @@ test.describe('Products', () => {
         await sideMenu.verifyClosedMenu();
     });
 
-    test('Close left menu clicking out of left menu', async({page}) =>{
+    test('Close left menu clicking out of left menu', async() =>{
         await sideMenu.openLeftMenu();
         await sideMenu.verifyOpenMenu();
         await sideMenu.closeLeftMenu('randomClick');
         await sideMenu.verifyClosedMenu();
+    });
+
+    test('Go to About page', async () => {
+        skipAfterEach = true;
+        await sideMenu.goToAboutAndVerify();
     });
 });

@@ -5,20 +5,20 @@ type PriceValue =  'lohi' | 'hilo';
 type DataValue = 'itemListByName' | 'itemListByPrice';
 
 export class ProductsPage {
-    page: Page;
-    firstProduct: Locator;
-    itemListByName: Locator;
-    itemListByPrice: Locator;
+    readonly page: Page;
+    readonly firstProduct: Locator;
+    readonly itemListByName: Locator;
+    readonly itemListByPrice: Locator;
+    readonly btn_burger: Locator;
+    readonly btn_sort: Locator;
+    readonly btn_cross: Locator;
+    readonly left_menu: Locator;
+    readonly btnBack: Locator;
+    readonly productName: Locator;
+    readonly itemNamesList: Locator;
+    readonly btn_shopingCart: Locator;
     originalData: string[];
     sortFn: (desc?: boolean) => (a: string, b: string) => number;
-    btn_burger: Locator;
-    btn_sort: Locator;
-    btn_cross: Locator;
-    left_menu: Locator;
-    btnBack: Locator;
-    productName: Locator;
-    itemNamesList: Locator;
-    btn_shopingCart: Locator;
 
 constructor(page: Page){
     this.page = page;
@@ -34,20 +34,22 @@ constructor(page: Page){
     this.originalData = [];
     
     this.sortFn = (desc: boolean = false) => (a: string, b: string) => {
+            console.log("ProductsPage, sortFn()");
             const priceA = parseFloat(a.replace('$', ''));
             const priceB = parseFloat(b.replace('$', ''));
             return !desc ? priceA - priceB : priceB - priceA;
-        }
-        
+        } 
     }
 
     async prepareData<T extends string>(data: DataValue, value: T) {
+        console.log("ProductsPage, prepareData()");
         this.originalData = await this[data].allTextContents();
         await this.page.selectOption('.product_sort_container', {value});
     }
 
     async sortByName(value: NameValue){
-         await this.prepareData<NameValue>('itemListByName', value);
+        console.log("ProductsPage, sortByName()");
+        await this.prepareData<NameValue>('itemListByName', value);
 
         const newProducNames = await this.itemListByName.allTextContents();      
        
@@ -60,6 +62,7 @@ constructor(page: Page){
     }
 
     async sortByPrice(value: PriceValue){
+        console.log("ProductsPage, sortByPrice()");
         await this.prepareData<PriceValue>('itemListByPrice', value);
 
         const newProductPrices = await this.itemListByPrice.allTextContents();
@@ -73,6 +76,7 @@ constructor(page: Page){
     }
 
     async openProduct(){
+        console.log("ProductsPage, openProduct()");
         const singleItemName = await this.itemNamesList.allTextContents();
 
         for(const name of singleItemName){
@@ -85,6 +89,7 @@ constructor(page: Page){
     }
 
     async verifyPageLink(){
+        console.log("ProductsPage, verifyPageLink()");
         await expect(this.page).toHaveURL(/.*inventory/);
     }
 }
