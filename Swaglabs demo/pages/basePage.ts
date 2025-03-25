@@ -1,10 +1,10 @@
 import {Page, Locator, expect} from "@playwright/test"
 
-class BasePage {
-    page: Page
+export class BasePage {
+    
+    readonly page: Page
 
     constructor(page: Page){
         this.page = page;
     }
-
 }

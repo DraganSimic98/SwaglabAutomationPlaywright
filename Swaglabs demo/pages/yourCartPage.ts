@@ -1,6 +1,7 @@
 import {Page, Locator, expect} from'@playwright/test';
 
 export class YourCartPage{
+    
     readonly page: Page;
     readonly btn_checkout: Locator;
     readonly btn_remove: Locator;

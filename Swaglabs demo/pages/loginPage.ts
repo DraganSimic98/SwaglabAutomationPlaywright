@@ -1,14 +1,15 @@
 import { Page, Locator, expect } from "@playwright/test";
 
 export class LoginPage {
-    page: Page;
-    usernameBox: Locator;
-    passwordField: Locator;
-    loginBtn: Locator;
-    lockedOutErrorMsg: Locator;
-    productPicture: Locator;
-    firstProduct: Locator;
-    productName: Locator;
+    
+    readonly page: Page;
+    readonly usernameBox: Locator;
+    readonly passwordField: Locator;
+    readonly loginBtn: Locator;
+    readonly lockedOutErrorMsg: Locator;
+    readonly productPicture: Locator;
+    readonly firstProduct: Locator;
+    readonly productName: Locator;
     
     constructor(page: Page) {
         this.page = page;
@@ -25,8 +26,7 @@ export class LoginPage {
         await this.usernameBox.fill(username);
         await this.passwordField.fill(password);
         await this.loginBtn.click();
-        await this.expectedResult(username);
-        
+        await this.expectedResult(username);   
     }
 
     async expectedResult(username: string){

@@ -5,6 +5,7 @@ type PriceValue =  'lohi' | 'hilo';
 type DataValue = 'itemListByName' | 'itemListByPrice';
 
 export class ProductsPage {
+   
     readonly page: Page;
     readonly firstProduct: Locator;
     readonly itemListByName: Locator;
@@ -20,29 +21,28 @@ export class ProductsPage {
     originalData: string[];
     sortFn: (desc?: boolean) => (a: string, b: string) => number;
 
-constructor(page: Page){
-    this.page = page;
-    this.firstProduct = page.locator('//div[text() = "Sauce Labs Backpack"]');
-    this.btn_sort = page.locator('//select[@class = "product_sort_container"]');
-    this.btnBack = this.page.locator('//button[@class = "inventory_details_back_button"]');
-    this.btn_shopingCart = this.page.locator('#shopping_cart_container'); 
-    this.itemListByName = page.locator('//div[@class = "inventory_item_name"]');
-    this.itemListByPrice = page.locator('//div[@class = "inventory_item_price"]');
-    this.itemNamesList = page.locator('//div[@class = "inventory_item_name"]');
-    this.productName = this.page.locator('//div[@class = "inventory_details_name"]');
-     
+    constructor(page: Page){
+        this.page = page;
+        this.firstProduct = page.locator('//div[text() = "Sauce Labs Backpack"]');
+        this.btn_sort = page.locator('//select[@class = "product_sort_container"]');
+        this.btnBack = this.page.locator('//button[@class = "inventory_details_back_button"]');
+        this.btn_shopingCart = this.page.locator('#shopping_cart_container'); 
+        this.itemListByName = page.locator('//div[@class = "inventory_item_name"]');
+        this.itemListByPrice = page.locator('//div[@class = "inventory_item_price"]');
+        this.itemNamesList = page.locator('//div[@class = "inventory_item_name"]');
+        this.productName = this.page.locator('//div[@class = "inventory_details_name"]');
+        
+        this.originalData = [];
     
-    this.originalData = [];
-    
-    this.sortFn = (desc: boolean = false) => (a: string, b: string) => {
+        this.sortFn = (desc: boolean = false) => (a: string, b: string) => {
             console.log("ProductsPage, sortFn()");
             const priceA = parseFloat(a.replace('$', ''));
             const priceB = parseFloat(b.replace('$', ''));
             return !desc ? priceA - priceB : priceB - priceA;
-        } 
-    }
+            } 
+        }
 
-    async prepareData<T extends string>(data: DataValue, value: T) {
+    async prepareData<T extends string>(data: DataValue, value: T){
         console.log("ProductsPage, prepareData()");
         this.originalData = await this[data].allTextContents();
         await this.page.selectOption('.product_sort_container', {value});
