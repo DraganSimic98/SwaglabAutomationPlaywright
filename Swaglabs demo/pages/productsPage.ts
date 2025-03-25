@@ -24,12 +24,13 @@ constructor(page: Page){
     this.page = page;
     this.firstProduct = page.locator('//div[text() = "Sauce Labs Backpack"]');
     this.btn_sort = page.locator('//select[@class = "product_sort_container"]');
+    this.btnBack = this.page.locator('//button[@class = "inventory_details_back_button"]');
+    this.btn_shopingCart = this.page.locator('#shopping_cart_container'); 
     this.itemListByName = page.locator('//div[@class = "inventory_item_name"]');
     this.itemListByPrice = page.locator('//div[@class = "inventory_item_price"]');
     this.itemNamesList = page.locator('//div[@class = "inventory_item_name"]');
-    this.btnBack = this.page.locator('//button[@class = "inventory_details_back_button"]');
     this.productName = this.page.locator('//div[@class = "inventory_details_name"]');
-    this.btn_shopingCart = this.page.locator('#shopping_cart_container');  
+     
     
     this.originalData = [];
     
