@@ -19,22 +19,17 @@ export class ProductsPage {
     productName: Locator;
     itemNamesList: Locator;
     btn_shopingCart: Locator;
-    btn_logout: Locator;
 
 constructor(page: Page){
     this.page = page;
     this.firstProduct = page.locator('//div[text() = "Sauce Labs Backpack"]');
     this.btn_sort = page.locator('//select[@class = "product_sort_container"]');
-    this.btn_burger = page.locator('//div[@class = "bm-burger-button"]');
-    this.btn_cross = page.locator('//div[@class = "bm-cross-button"]');
-    this.left_menu = page.locator('//div[@class = "bm-menu"]');
     this.itemListByName = page.locator('//div[@class = "inventory_item_name"]');
     this.itemListByPrice = page.locator('//div[@class = "inventory_item_price"]');
     this.itemNamesList = page.locator('//div[@class = "inventory_item_name"]');
     this.btnBack = this.page.locator('//button[@class = "inventory_details_back_button"]');
     this.productName = this.page.locator('//div[@class = "inventory_details_name"]');
-    this.btn_shopingCart = this.page.locator('#shopping_cart_container');
-    this.btn_logout = this.page.locator('[id="logout_sidebar_link"]')
+    this.btn_shopingCart = this.page.locator('#shopping_cart_container');  
     
     this.originalData = [];
     
@@ -43,6 +38,7 @@ constructor(page: Page){
             const priceB = parseFloat(b.replace('$', ''));
             return !desc ? priceA - priceB : priceB - priceA;
         }
+        
     }
 
     async prepareData<T extends string>(data: DataValue, value: T) {
@@ -88,38 +84,7 @@ constructor(page: Page){
         }
     }
 
-    async logOut(){
-        await this.openLeftMenu();
-        await this.verifyOpenMenu();
-        await this.btn_logout.click();
-    }
-
-    async verifyLogOut(){
-        await expect(this.page).toHaveURL(/.*index/)
-    }
-
-    async openLeftMenu(){
-        console.log("productsPage, openLeftMenu()");
-        await this.btn_burger.click();
-    }
-
-    async verifyOpenMenu(){
-        console.log("productsPage, verifyOpenMenu()");
-        await expect(this.left_menu).toBeVisible();
-    }
-
-    async closeLeftMenu(option: 'cross' | 'randomClick'){
-        console.log("productsPage, closeLeftMenu()");
-        if(option === 'cross'){
-            await this.btn_cross.click();
-        }
-        else{
-            await this.btn_sort.click({force: true})
-        }
-    }
- 
-    async verifyClosedMenu(){
-        console.log("productsPage, verifyClosedMenu()");
-        await expect(this.left_menu).not.toBeInViewport();
+    async verifyPageLink(){
+        await expect(this.page).toHaveURL(/.*inventory/);
     }
 }
