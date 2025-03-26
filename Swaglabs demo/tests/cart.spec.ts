@@ -42,11 +42,11 @@ test.describe('Cart', () => {
             await cartPage.verifyEmptyCart();
         });
 
-        test('Remove item from cart', async () => {
-            await productPage.addProductToCart(1);
+        test.only('Remove item from cart', async () => {
+            await productPage.addProductToCart(4);
             await cartPage.navigation();
             await cartPage.verifyPopulatedCart();
-            await cartPage.removeProductFromCart();
+            await cartPage.removeAllProductsFromCart();
             await cartPage.verifyEmptyCart();
         });  
         

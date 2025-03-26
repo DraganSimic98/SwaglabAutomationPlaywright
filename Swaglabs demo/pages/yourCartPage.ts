@@ -35,17 +35,21 @@ export class YourCartPage{
 
     async verifyEmptyCart(){
         console.log("YourCartPage, verifyEmptyCart()");
-        await expect(this.lbl_cartItem).not.toBeVisible();
+        await expect(this.lbl_cartItem.first()).not.toBeVisible();
     }
 
     async verifyPopulatedCart(){
-        console.log("YourCartPage, verifyPopulatedCart()");
-        await expect(this.lbl_cartItem).toBeVisible();
-    }
+        console.log("YourCartPage, verifyPopulatedCart()");     
+        expect(this.lbl_cartItem.first()).toBeVisible();        
+        }
 
-    async removeProductFromCart(){
+    async removeAllProductsFromCart(){
         console.log("YourCartPage, removeProductFromCart()");
-        await this.btn_remove.click();
+        const count = await this.btn_remove.count();
+        
+        for(let i = 0; i <= count-1; i++){
+            await this.btn_remove.nth(0).click();
+        }
     }
 
     async continueShopping(){

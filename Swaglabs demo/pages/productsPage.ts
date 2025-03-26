@@ -101,7 +101,7 @@ export class ProductsPage {
 
     async addProductToCart(addItem: number){
         console.log("ProductsPage, addProductToCart");
-        const btn_addItem = this.page.locator(`//div[@id="inventory_container"]/div/div[${addItem}]/div[3]/button`);
-        await btn_addItem.click();
+        for(let i = 1; i <= addItem; i++)
+            await this.page.locator(`//div[@id="inventory_container"]/div/div[${i}]/div[3]/button`).click();   
     }
 }
