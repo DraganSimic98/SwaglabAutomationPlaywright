@@ -26,7 +26,7 @@ test.describe('Cart', () => {
         });
     
         test('Open cart and verify title', async () => {
-            await productPage.btn_shopingCart.click();
+            await productPage.openCart();
             await cartPage.verifyPageLink();
             await cartPage.verifyPageTitle();
         });    
@@ -34,6 +34,25 @@ test.describe('Cart', () => {
         test('Go to All Items page', async () => {
             await cartPage.navigation();
             await sideMenu.returnToAllItems();
+            await productPage.verifyPageLink();
+        });
+
+        test('Check if the cart is empty', async () => {
+            await cartPage.navigation();
+            await cartPage.verifyEmptyCart();
+        });
+
+        test('Remove item from cart', async () => {
+            await productPage.addProductToCart(1);
+            await cartPage.navigation();
+            await cartPage.verifyPopulatedCart();
+            await cartPage.removeProductFromCart();
+            await cartPage.verifyEmptyCart();
+        });  
+        
+        test('Continue shopping', async () => {
+            await cartPage.navigation();
+            await cartPage.continueShopping();
             await productPage.verifyPageLink();
         });
     });

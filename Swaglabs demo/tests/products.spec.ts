@@ -62,4 +62,8 @@ test.describe('Products', () => {
         skipAfterEach = true;
         await sideMenu.goToAboutAndVerify();
     });
+
+    test('Add product to cart', async () => {
+        await productPage.addProductToCart(1);
+    }); 
 });

@@ -7,6 +7,7 @@ export class YourCartPage{
     readonly btn_remove: Locator;
     readonly btn_continueShopping: Locator;
     readonly lbl_subheader: Locator;
+    readonly lbl_cartItem: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -14,6 +15,7 @@ export class YourCartPage{
         this.btn_remove = page.locator("//button[@class = 'btn_secondary cart_button']");
         this.btn_continueShopping = page.locator("//div[@class = 'cart_footer']/a[@class = 'btn_secondary']");
         this.lbl_subheader = page.locator("//div[@class = 'subheader']");
+        this.lbl_cartItem = page.locator("//div[@class='cart_item']");
     }
 
     async navigation(){
@@ -29,5 +31,25 @@ export class YourCartPage{
     async verifyPageTitle(){
         console.log("YourCartPage, verifyPageTitle()");
         await expect(this.lbl_subheader).toHaveText("Your Cart");
+    }
+
+    async verifyEmptyCart(){
+        console.log("YourCartPage, verifyEmptyCart()");
+        await expect(this.lbl_cartItem).not.toBeVisible();
+    }
+
+    async verifyPopulatedCart(){
+        console.log("YourCartPage, verifyPopulatedCart()");
+        await expect(this.lbl_cartItem).toBeVisible();
+    }
+
+    async removeProductFromCart(){
+        console.log("YourCartPage, removeProductFromCart()");
+        await this.btn_remove.click();
+    }
+
+    async continueShopping(){
+        console.log("YourCartPage, continueShopping()");     
+        await this.btn_continueShopping.click();
     }
 }

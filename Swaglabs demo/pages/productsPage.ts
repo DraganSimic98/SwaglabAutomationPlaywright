@@ -93,4 +93,15 @@ export class ProductsPage {
         console.log("ProductsPage, verifyPageLink()");
         await expect(this.page).toHaveURL(/.*inventory/);
     }
+
+    async openCart(){
+        console.log("ProductsPage, openCart()");
+        await this.btn_shopingCart.click();
+    }
+
+    async addProductToCart(addItem: number){
+        console.log("ProductsPage, addProductToCart");
+        const btn_addItem = this.page.locator(`//div[@id="inventory_container"]/div/div[${addItem}]/div[3]/button`);
+        await btn_addItem.click();
+    }
 }

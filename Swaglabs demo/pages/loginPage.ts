@@ -23,6 +23,8 @@ export class LoginPage {
     }
 
     async loginWithAnyTypeOfUser(username: string, password: string){
+        console.log("LoginPage, loginWithAnyTypeOfUser()");
+               
         await this.usernameBox.fill(username);
         await this.passwordField.fill(password);
         await this.loginBtn.click();
@@ -30,6 +32,8 @@ export class LoginPage {
     }
 
     async expectedResult(username: string){
+        console.log("LoginPage, expectedResult()");
+        
         switch (username){
             case 'standard_user' :
                 await expect(this.page).toHaveURL(/.*inventory/);
@@ -45,7 +49,8 @@ export class LoginPage {
     }
 
     async navigation(){
-        await this.page.goto('/v1')
+        console.log("LoginPage, navigation");       
+        await this.page.goto('/v1');
     }
 }
 
