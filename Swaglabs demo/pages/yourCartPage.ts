@@ -47,7 +47,7 @@ export class YourCartPage{
         console.log("YourCartPage, removeProductFromCart()");
         const count = await this.btn_remove.count();
         
-        for(let i = 0; i <= count-1; i++){
+        for(let i = 0; i < count; i++){
             await this.btn_remove.nth(0).click();
         }
     }

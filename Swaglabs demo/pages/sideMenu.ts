@@ -10,6 +10,7 @@ export class SideMenu{
     readonly left_menu: Locator;
     readonly btn_allItems: Locator;
     readonly btn_about: Locator;
+    readonly btn_resetAppState: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -20,6 +21,7 @@ export class SideMenu{
         this.btn_allItems = page.locator('#inventory_sidebar_link');
         this.left_menu = page.locator('//div[@class="bm-menu"]');
         this.btn_about = page.locator('#about_sidebar_link');
+        this.btn_resetAppState = page.locator('#reset_sidebar_link');
     }
 
     async logOut(){
@@ -73,5 +75,12 @@ export class SideMenu{
         await this.btn_about.click();
         
         await expect(this.page).toHaveURL("https://saucelabs.com/");
+    }
+
+    async resetAppState(){
+        console.log("Side Menu, resetAppState()");
+        await this.openLeftMenu();
+        await this.verifyOpenMenu();
+        await this.btn_resetAppState.click();     
     }
 }

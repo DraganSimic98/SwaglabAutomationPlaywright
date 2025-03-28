@@ -42,7 +42,7 @@ test.describe('Cart', () => {
             await cartPage.verifyEmptyCart();
         });
 
-        test.only('Remove item from cart', async () => {
+        test('Remove item from cart', async () => {
             await productPage.addProductToCart(4);
             await cartPage.navigation();
             await cartPage.verifyPopulatedCart();
