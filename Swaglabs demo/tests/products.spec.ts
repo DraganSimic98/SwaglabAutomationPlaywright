@@ -2,11 +2,13 @@ import {test, expect} from "@playwright/test";
 import { LoginPage } from "../pages/loginPage";
 import { ProductsPage } from "../pages/productsPage";
 import { SideMenu } from "../pages/sideMenu";
+import { YourCartPage } from "../pages/yourCartPage";
 
 test.describe('Products', () => {
     let loginpage: LoginPage;
     let productPage: ProductsPage;
     let sideMenu: SideMenu;
+    let cartPage: YourCartPage;
     let password = 'secret_sauce';
     let skipAfterEach = false;
 
@@ -14,6 +16,7 @@ test.describe('Products', () => {
         loginpage = new LoginPage(page);
         productPage = new ProductsPage(page);
         sideMenu = new SideMenu(page);
+        cartPage = new YourCartPage(page);
         await loginpage.navigation();
         await loginpage.loginWithAnyTypeOfUser('standard_user', password);
     });
@@ -65,5 +68,16 @@ test.describe('Products', () => {
 
     test('Add product to cart', async () => {
         await productPage.addProductToCart(1);
+        await cartPage.verifyPopulatedCart();
+    }); 
+
+    test.only('Remove products from cart', async () => {
+        await productPage.addProductToCart(1);
+        await cartPage.navigation();
+        await cartPage.verifyPopulatedCart();
+        await cartPage.continueShopping();
+        await productPage.removeOneProduct(1);
+        await cartPage.navigation();
+        await cartPage.verifyEmptyCart();
     }); 
 });

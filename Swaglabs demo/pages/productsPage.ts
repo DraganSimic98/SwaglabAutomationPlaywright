@@ -1,10 +1,11 @@
 import {Page, Locator, expect} from "@playwright/test"
+import { BasePage } from "./basePage";
 
 type NameValue =  "az" | "za";
 type PriceValue =  'lohi' | 'hilo';
 type DataValue = 'itemListByName' | 'itemListByPrice';
 
-export class ProductsPage {
+export class ProductsPage extends BasePage{
    
     readonly page: Page;
     readonly firstProduct: Locator;
@@ -22,6 +23,7 @@ export class ProductsPage {
     sortFn: (desc?: boolean) => (a: string, b: string) => number;
 
     constructor(page: Page){
+        super(page);
         this.page = page;
         this.firstProduct = page.locator('//div[text() = "Sauce Labs Backpack"]');
         this.btn_sort = page.locator('//select[@class = "product_sort_container"]');

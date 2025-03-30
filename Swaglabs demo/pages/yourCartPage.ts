@@ -1,6 +1,7 @@
 import {Page, Locator, expect} from'@playwright/test';
+import { BasePage } from './basePage';
 
-export class YourCartPage{
+export class YourCartPage extends BasePage{
     
     readonly page: Page;
     readonly btn_checkout: Locator;
@@ -10,6 +11,7 @@ export class YourCartPage{
     readonly lbl_cartItem: Locator;
 
     constructor(page: Page){
+        super(page);
         this.page = page;
         this.btn_checkout = page.locator("//a[@class = 'btn_action checkout_button']");
         this.btn_remove = page.locator("//button[@class = 'btn_secondary cart_button']");
