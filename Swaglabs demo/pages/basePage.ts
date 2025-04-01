@@ -7,19 +7,19 @@ export class BasePage {
 
     constructor(page: Page){
         this.page = page;
-        this.btn_remove = page.locator("//button[text() = 'REMOVE']");
+        
     }
 
-    async removeOneProduct(product: number){
-        await this.btn_remove.nth(product).click();
+    async removeOneProduct(selector:Locator, product: number){
+        await selector.nth(product).click();
     }
 
-    async removeAllProductsFromCart(){
+    async removeAllProductsFromCart(selector: Locator){
         console.log("YourCartPage, removeProductFromCart()");
-        const count = await this.btn_remove.count();
+        const count = await selector.count();
         
         for(let i = 0; i < count; i++){
-            await this.btn_remove.nth(0).click();
+            await selector.nth(0).click();
         }
     }
 }

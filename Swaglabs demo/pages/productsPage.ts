@@ -14,6 +14,7 @@ export class ProductsPage extends BasePage{
     readonly btn_burger: Locator;
     readonly btn_sort: Locator;
     readonly btn_cross: Locator;
+    readonly btn_remove: Locator;
     readonly left_menu: Locator;
     readonly btnBack: Locator;
     readonly productName: Locator;
@@ -29,6 +30,7 @@ export class ProductsPage extends BasePage{
         this.btn_sort = page.locator('//select[@class = "product_sort_container"]');
         this.btnBack = this.page.locator('//button[@class = "inventory_details_back_button"]');
         this.btn_shopingCart = this.page.locator('#shopping_cart_container'); 
+        this.btn_remove = page.locator("//button[text() = 'REMOVE']");
         this.itemListByName = page.locator('//div[@class = "inventory_item_name"]');
         this.itemListByPrice = page.locator('//div[@class = "inventory_item_price"]');
         this.itemNamesList = page.locator('//div[@class = "inventory_item_name"]');
