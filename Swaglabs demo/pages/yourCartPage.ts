@@ -45,15 +45,6 @@ export class YourCartPage extends BasePage{
         expect(this.lbl_cartItem.first()).toBeVisible();        
         }
 
-    // async removeAllProductsFromCart(){
-    //     console.log("YourCartPage, removeProductFromCart()");
-    //     const count = await this.btn_remove.count();
-        
-    //     for(let i = 0; i < count; i++){
-    //         await this.btn_remove.nth(0).click();
-    //     }
-    // }
-
     async continueShopping(){
         console.log("YourCartPage, continueShopping()");     
         await this.btn_continueShopping.click();

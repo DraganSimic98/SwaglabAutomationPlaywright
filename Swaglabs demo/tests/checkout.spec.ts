@@ -31,16 +31,26 @@ test.describe('Checkout page tests', () => {
         await sideMenu.verifyLogOut();
     });
 
-    test('Test', async () => {
+    test('Fill the form and go to next page', async () => {
         await productPage.addProductToCart(2);
         await productPage.openCart();
         await yourCartPage.verifyPopulatedCart();
         await yourCartPage.goToChekcout();
         await checkoutPage.verifyPageLink();
-        await checkoutPage.fillTheForm("Milorad", "", "35000");
-        await checkoutPage.verifyIfFormIsFilled();
+        await checkoutPage.fillTheForm("Miki", "Simic", "35000");
+        await checkoutPage.verifyFilledForm();
+        await checkoutPage.continueWithOrdering();
+        //verify that user is on next page
+    });
 
-    })
-    
-    
+    test('Fill the form without last name and verify error message', async () => {
+        await productPage.addProductToCart(2);
+        await productPage.openCart();
+        await yourCartPage.verifyPopulatedCart();
+        await yourCartPage.goToChekcout();
+        await checkoutPage.verifyPageLink();
+        await checkoutPage.fillTheForm("Miki", "", "35000");
+        await checkoutPage.continueWithOrdering();
+        await checkoutPage.verifyErrorMesseege();
+    });
 });

@@ -29,4 +29,16 @@ test.describe('Log in', () =>{
     test('Login with problem user', async ({}) => {
         await loginpage.loginWithAnyTypeOfUser(myHelper.problemUsername, myHelper.password);        
     });  
+
+    test('Login with wrong user', async () => {
+        await loginpage.loginWithAnyTypeOfUser(myHelper.wrongUsername, myHelper.wrongPassword);
+    });
+
+    test('Login without username', async () => {
+        await loginpage.loginWithAnyTypeOfUser(myHelper.noUsernameUser, myHelper.noUsernamePassword);
+    });
+
+    test('Login without password', async () => {
+        await loginpage.loginWithAnyTypeOfUser(myHelper.noPasswordUser, myHelper.noPassword);
+    });
 });

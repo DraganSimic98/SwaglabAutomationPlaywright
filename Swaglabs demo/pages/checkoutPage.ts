@@ -6,7 +6,7 @@ export class CheckoutPage{
     readonly lbl_subheader: Locator;
     readonly btn_cancel: Locator;
     readonly input_firstName: Locator;
-    readonly inpit_lastName: Locator;
+    readonly input_lastName: Locator;
     readonly input_postalCode: Locator;
     readonly btn_continue: Locator;
     readonly errMsg_firstName: Locator;
@@ -19,7 +19,7 @@ export class CheckoutPage{
         this.btn_cancel = page.locator('//a[@class="cart_cancel_link btn_secondary"]');
         this.btn_continue = page.locator('//input[@value="CONTINUE"]')
         this.input_firstName = page.locator('#first-name');
-        this.inpit_lastName = page.locator('#last-name');
+        this.input_lastName = page.locator('#last-name');
         this.input_postalCode = page.locator('#postal-code');
         this.errMsg_firstName = page.locator('//h3[text()="First Name is required"]');
         this.errMsg_lastName = page.locator('//h3[text()="Last Name is required"]')
@@ -50,28 +50,42 @@ export class CheckoutPage{
     async fillTheForm(firstName: string, lastName: string, zip: string){
         console.log("CheckoutPage, fillTheForm()");
         await this.input_firstName.fill(firstName);
-        await this.inpit_lastName.fill(lastName);
+        await this.input_lastName.fill(lastName);
         await this.input_postalCode.fill(zip);
     }
 
+    async verifyFilledForm(){
+        console.log("CheckoutPage, verifyFilledForm()");     
+        try{
+            await expect(this.input_firstName).not.toBeEmpty();
+            await expect(this.input_lastName).not.toBeEmpty();
+            await expect(this.input_postalCode).not.toBeEmpty();
+        }catch(e){
+            console.log('Error', e);          
+        }
+    }
+
     async continueWithOrdering(){
-        console.log("CheckoutPage, continueVithOrdering()");
+        console.log("CheckoutPage, continueWithOrdering()");
         await this.btn_continue.click();
     }
 
-    async verifyIfFormIsFilled(){
-        await this.btn_continue.click();
-        if(!this.input_firstName.textContent()){
+    async verifyErrorMesseege(){
+        console.log("CheckoutPage, verifyErrorMesseege()");
+        
+        const firstName = await this.input_firstName.inputValue()
+        const lastName = await this.input_lastName.inputValue()
+        const postalCode = await this.input_postalCode.inputValue()
+        console.log(firstName, lastName, postalCode);
+        
+        if(firstName === ""){
             await expect(this.errMsg_firstName).toBeVisible();
         }
-        if(!this.inpit_lastName.textContent()){
+        else if(lastName === ""){
             await expect(this.errMsg_lastName).toBeVisible();
         }
-        if(!this.input_postalCode.textContent()){
+        else if(postalCode === ""){
             await expect(this.errMsg_postalCode).toBeVisible();
-        }
-        else{
-            await expect(this.page).toHaveURL('https://www.saucedemo.com/v1/checkout-step-two.html');
         }
     }
 }

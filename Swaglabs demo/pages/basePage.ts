@@ -7,7 +7,6 @@ export class BasePage {
 
     constructor(page: Page){
         this.page = page;
-        
     }
 
     async removeOneProduct(selector:Locator, product: number){
