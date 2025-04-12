@@ -2,20 +2,26 @@ import {test, expect} from "@playwright/test";
 import { LoginPage } from "../pages/loginPage";
 import { ProductsPage } from "../pages/productsPage";
 import { SideMenu } from "../pages/sideMenu";
+import { YourCartPage } from "../pages/yourCartPage";
+import { MyHelper } from "../helper";
 
 test.describe('Products', () => {
     let loginpage: LoginPage;
     let productPage: ProductsPage;
     let sideMenu: SideMenu;
-    let password = 'secret_sauce';
+    let cartPage: YourCartPage;
+    let myHelper: MyHelper;
     let skipAfterEach = false;
 
     test.beforeEach(async ({page})=>{
         loginpage = new LoginPage(page);
         productPage = new ProductsPage(page);
         sideMenu = new SideMenu(page);
+        cartPage = new YourCartPage(page);
+        myHelper = new MyHelper();
+
         await loginpage.navigation();
-        await loginpage.loginWithAnyTypeOfUser('standard_user', password);
+        await loginpage.loginWithAnyTypeOfUser(myHelper.standardUsername, myHelper.password);
     });
 
     test.afterEach(async () => {
@@ -65,5 +71,17 @@ test.describe('Products', () => {
 
     test('Add product to cart', async () => {
         await productPage.addProductToCart(1);
+        await cartPage.navigation();
+        await cartPage.verifyPopulatedCart();
+    }); 
+
+    test('Remove products from cart', async () => {
+        await productPage.addProductToCart(1);
+        await cartPage.navigation();
+        await cartPage.verifyPopulatedCart();
+        await cartPage.continueShopping();
+        await productPage.removeOneProduct(productPage.btn_remove, 0);
+        await cartPage.navigation();
+        await cartPage.verifyEmptyCart();
     }); 
 });

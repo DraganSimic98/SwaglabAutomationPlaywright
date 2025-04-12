@@ -3,21 +3,23 @@ import { LoginPage } from "../pages/loginPage";
 import { ProductsPage } from "../pages/productsPage";
 import { YourCartPage } from "../pages/yourCartPage";
 import { SideMenu } from "../pages/sideMenu";
+import { MyHelper } from "../helper";
 
 test.describe('Cart', () => {
         let loginpage: LoginPage;
         let productPage: ProductsPage;
         let sideMenu: SideMenu;
         let cartPage: YourCartPage;
-        let password = 'secret_sauce';
+        let myHelper: MyHelper;
     
         test.beforeEach(async ({page})=>{
             loginpage = new LoginPage(page);
             productPage = new ProductsPage(page);
             cartPage = new YourCartPage(page);
             sideMenu = new SideMenu(page);
+            myHelper = new MyHelper()
             await loginpage.navigation();
-            await loginpage.loginWithAnyTypeOfUser('standard_user', password);
+            await loginpage.loginWithAnyTypeOfUser(myHelper.standardUsername, myHelper.password);
         });
         
         test.afterEach(async () => {
@@ -46,7 +48,7 @@ test.describe('Cart', () => {
             await productPage.addProductToCart(4);
             await cartPage.navigation();
             await cartPage.verifyPopulatedCart();
-            await cartPage.removeAllProductsFromCart();
+            await cartPage.removeAllProductsFromCart(cartPage.btn_remove);
             await cartPage.verifyEmptyCart();
         });  
         

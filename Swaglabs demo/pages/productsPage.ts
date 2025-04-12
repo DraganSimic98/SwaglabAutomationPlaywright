@@ -1,10 +1,11 @@
 import {Page, Locator, expect} from "@playwright/test"
+import { BasePage } from "./basePage";
 
 type NameValue =  "az" | "za";
 type PriceValue =  'lohi' | 'hilo';
 type DataValue = 'itemListByName' | 'itemListByPrice';
 
-export class ProductsPage {
+export class ProductsPage extends BasePage{
    
     readonly page: Page;
     readonly firstProduct: Locator;
@@ -13,6 +14,7 @@ export class ProductsPage {
     readonly btn_burger: Locator;
     readonly btn_sort: Locator;
     readonly btn_cross: Locator;
+    readonly btn_remove: Locator;
     readonly left_menu: Locator;
     readonly btnBack: Locator;
     readonly productName: Locator;
@@ -22,11 +24,13 @@ export class ProductsPage {
     sortFn: (desc?: boolean) => (a: string, b: string) => number;
 
     constructor(page: Page){
+        super(page);
         this.page = page;
         this.firstProduct = page.locator('//div[text() = "Sauce Labs Backpack"]');
         this.btn_sort = page.locator('//select[@class = "product_sort_container"]');
         this.btnBack = this.page.locator('//button[@class = "inventory_details_back_button"]');
         this.btn_shopingCart = this.page.locator('#shopping_cart_container'); 
+        this.btn_remove = page.locator("//button[text() = 'REMOVE']");
         this.itemListByName = page.locator('//div[@class = "inventory_item_name"]');
         this.itemListByPrice = page.locator('//div[@class = "inventory_item_price"]');
         this.itemNamesList = page.locator('//div[@class = "inventory_item_name"]');
