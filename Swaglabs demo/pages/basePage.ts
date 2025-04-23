@@ -9,6 +9,31 @@ export class BasePage {
         this.page = page;
     }
 
+    /** 
+     * Method should redirect user to enterd location
+     *  @param url - destination that user should be redirected
+    */ 
+    async navigate(url: string){
+        await this.page.goto(url);
+    }
+
+    /**
+     * Method should verify page title
+     * @param title - title text
+     * @param selector - locator of title element
+     */
+    async verifyPageTitle(title: string, selector: Locator){
+        await expect(selector).toHaveText(title);
+    }
+
+    /**
+     * Method should verify page link
+     * @param link link that should be verified
+     */
+    async verifyPageLink(link: RegExp){
+        await expect(this.page).toHaveURL(link);
+    }
+
     async removeOneProduct(selector:Locator, product: number){
         await selector.nth(product).click();
     }
@@ -20,17 +45,5 @@ export class BasePage {
         for(let i = 0; i < count; i++){
             await selector.nth(0).click();
         }
-    }
-
-    async navigate(url: string){
-        await this.page.goto(url);
-    }
-
-    async verifyPageTitle(text: string, title: Locator){
-        await expect(title).toHaveText(text);
-    }
-
-    async verifyPageLink(link: RegExp){
-        await expect(this.page).toHaveURL(link);
     }
 }
