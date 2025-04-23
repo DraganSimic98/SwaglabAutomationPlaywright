@@ -20,21 +20,6 @@ export class YourCartPage extends BasePage{
         this.lbl_cartItem = page.locator("//div[@class='cart_item']");
     }
 
-    async navigation(){
-        console.log("YourCartPage, navigation()");
-        await this.page.goto("https://www.saucedemo.com/v1/cart.html");
-    }
-
-    async verifyPageLink(){
-        console.log("YourCartPage, verifyPageLink()");
-        await expect(this.page).toHaveURL(/.*cart/);
-    }
-
-    async verifyPageTitle(){
-        console.log("YourCartPage, verifyPageTitle()");
-        await expect(this.lbl_subheader).toHaveText("Your Cart");
-    }
-
     async verifyEmptyCart(){
         console.log("YourCartPage, verifyEmptyCart()");
         await expect(this.lbl_cartItem.first()).not.toBeVisible();

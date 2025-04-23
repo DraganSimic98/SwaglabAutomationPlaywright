@@ -20,6 +20,7 @@ export class ProductsPage extends BasePage{
     readonly productName: Locator;
     readonly itemNamesList: Locator;
     readonly btn_shopingCart: Locator;
+    readonly lbl_products: Locator;
     originalData: string[];
     sortFn: (desc?: boolean) => (a: string, b: string) => number;
 
@@ -35,6 +36,7 @@ export class ProductsPage extends BasePage{
         this.itemListByPrice = page.locator('//div[@class = "inventory_item_price"]');
         this.itemNamesList = page.locator('//div[@class = "inventory_item_name"]');
         this.productName = this.page.locator('//div[@class = "inventory_details_name"]');
+        this.lbl_products = this.page.locator('//div[text()="Products"]');
         
         this.originalData = [];
     
@@ -93,10 +95,10 @@ export class ProductsPage extends BasePage{
         }
     }
 
-    async verifyPageLink(){
-        console.log("ProductsPage, verifyPageLink()");
-        await expect(this.page).toHaveURL(/.*inventory/);
-    }
+    // async verifyPageLink(){
+    //     console.log("ProductsPage, verifyPageLink()");
+    //     await expect(this.page).toHaveURL(/.*inventory/);
+    // }
 
     async openCart(){
         console.log("ProductsPage, openCart()");
@@ -107,5 +109,10 @@ export class ProductsPage extends BasePage{
         console.log("ProductsPage, addProductToCart");
         for(let i = 1; i <= addItem; i++)
             await this.page.locator(`//div[@id="inventory_container"]/div/div[${i}]/div[3]/button`).click();   
+    }
+
+    async cartItemCounter(selector: Locator){
+        let count = selector.innerText();
+        return count;
     }
 }

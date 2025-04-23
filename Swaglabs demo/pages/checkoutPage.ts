@@ -1,6 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
+import { BasePage } from "./basePage";
 
-export class CheckoutPage{
+export class CheckoutPage extends BasePage{
 
     readonly page: Page;
     readonly lbl_subheader: Locator;
@@ -14,6 +15,7 @@ export class CheckoutPage{
     readonly errMsg_postalCode: Locator;
     
     constructor(page: Page){
+        super(page);
         this.page = page;
         this.lbl_subheader = page.locator('//div[@class="subheader"]');
         this.btn_cancel = page.locator('//a[@class="cart_cancel_link btn_secondary"]');
@@ -25,23 +27,7 @@ export class CheckoutPage{
         this.errMsg_lastName = page.locator('//h3[text()="Last Name is required"]')
         this.errMsg_postalCode = page.locator('//h3[text()="Postal Code is required"]');
     }
-
-    async navigate(){
-        console.log("CheckoutPage, navigate()");       
-        await this.page.goto('https://www.saucedemo.com/v1/checkout-step-one.html');
-    }
-
-    async verifyPageLink(){
-        console.log("CheckoutPage, verifyPageLink()");
-        await expect(this.page).toHaveURL(/.*checkout-step-one/);
-        
-    }
-
-    async verifyPageTitle(){
-        console.log("CheckoutPage, verifyPageTitle()");
-        await expect(this.lbl_subheader).toHaveText('Checkout: Your Information');
-    }
-
+ 
     async returnToMyCart(){
         console.log("CheckoutPage, returnToMyCart()");
         await this.btn_cancel.click();

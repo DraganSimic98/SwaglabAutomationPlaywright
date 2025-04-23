@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
-import exp from "constants";
+import { BasePage } from "./basePage";
 
-export class LoginPage {
+export class LoginPage extends BasePage{
     
     readonly page: Page;
     readonly usernameBox: Locator;
@@ -13,6 +13,7 @@ export class LoginPage {
     readonly productName: Locator;
     
     constructor(page: Page) {
+        super(page);
         this.page = page;
         this.usernameBox = page.locator('//input[@type = "text"]');
         this.passwordField = page.locator('//input[@type = "password"]');
@@ -21,7 +22,6 @@ export class LoginPage {
         this.productPicture = page.locator('//img[@class="inventory_item_img"]'); 
         this.firstProduct = page.locator('//div[text() = "Sauce Labs Backpack"]');
         this.productName = page.locator('//div[@class="inventory_details_name"]');
-
     }
 
     async loginWithAnyTypeOfUser(username: string, password: string){
@@ -57,11 +57,6 @@ export class LoginPage {
                 await expect(this.errorMsg).toContainText('Epic sadface: Password is required');
                 break;
             }            
-    }
-
-    async navigation(){
-        console.log("LoginPage, navigation");       
-        await this.page.goto('/v1');
     }
 }
 

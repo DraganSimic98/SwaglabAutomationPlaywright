@@ -15,7 +15,7 @@ test.describe('Log in', () =>{
         productPage = new ProductsPage(page);
         singleProductPage = new SingleProductPage(page);
         myHelper = new MyHelper();
-        await loginpage.navigation();
+        await loginpage.navigate('https://www.saucedemo.com/v1/index.html');
     });
 
     test('Login with standard user', async ({}) => {

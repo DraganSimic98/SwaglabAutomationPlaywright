@@ -20,7 +20,7 @@ test.describe('Products', () => {
         cartPage = new YourCartPage(page);
         myHelper = new MyHelper();
 
-        await loginpage.navigation();
+        await loginpage.navigate('https://www.saucedemo.com/v1/index.html');
         await loginpage.loginWithAnyTypeOfUser(myHelper.standardUsername, myHelper.password);
     });
 
@@ -64,24 +64,24 @@ test.describe('Products', () => {
         await sideMenu.verifyClosedMenu();
     });
 
-    test('Go to About page', async () => {
+    test.only('Go to About page', async () => {
         skipAfterEach = true;
         await sideMenu.goToAboutAndVerify();
     });
 
     test('Add product to cart', async () => {
         await productPage.addProductToCart(1);
-        await cartPage.navigation();
+        await cartPage.navigate('https://www.saucedemo.com/v1/cart.html');
         await cartPage.verifyPopulatedCart();
     }); 
 
     test('Remove products from cart', async () => {
         await productPage.addProductToCart(1);
-        await cartPage.navigation();
+        await cartPage.navigate('https://www.saucedemo.com/v1/cart.html');
         await cartPage.verifyPopulatedCart();
         await cartPage.continueShopping();
         await productPage.removeOneProduct(productPage.btn_remove, 0);
-        await cartPage.navigation();
+        await cartPage.navigate('https://www.saucedemo.com/v1/cart.html');
         await cartPage.verifyEmptyCart();
     }); 
 });

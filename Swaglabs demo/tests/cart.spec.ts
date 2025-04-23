@@ -18,7 +18,7 @@ test.describe('Cart', () => {
             cartPage = new YourCartPage(page);
             sideMenu = new SideMenu(page);
             myHelper = new MyHelper()
-            await loginpage.navigation();
+            await loginpage.navigate('https://www.saucedemo.com/v1/index.html');
             await loginpage.loginWithAnyTypeOfUser(myHelper.standardUsername, myHelper.password);
         });
         
@@ -29,32 +29,32 @@ test.describe('Cart', () => {
     
         test('Open cart and verify title', async () => {
             await productPage.openCart();
-            await cartPage.verifyPageLink();
-            await cartPage.verifyPageTitle();
+            await cartPage.verifyPageLink(/.*cart/);
+            await cartPage.verifyPageTitle("Your Cart", cartPage.lbl_subheader);
         });    
 
         test('Go to All Items page', async () => {
-            await cartPage.navigation();
+            await cartPage.navigate('https://www.saucedemo.com/v1/cart.html');
             await sideMenu.returnToAllItems();
-            await productPage.verifyPageLink();
+            await productPage.verifyPageLink(/.*cart/);
         });
 
         test('Check if the cart is empty', async () => {
-            await cartPage.navigation();
+            await cartPage.navigate('https://www.saucedemo.com/v1/cart.html');
             await cartPage.verifyEmptyCart();
         });
 
         test('Remove item from cart', async () => {
             await productPage.addProductToCart(4);
-            await cartPage.navigation();
+            await cartPage.navigate('https://www.saucedemo.com/v1/cart.html');
             await cartPage.verifyPopulatedCart();
             await cartPage.removeAllProductsFromCart(cartPage.btn_remove);
             await cartPage.verifyEmptyCart();
         });  
         
         test('Continue shopping', async () => {
-            await cartPage.navigation();
+            await cartPage.navigate('https://www.saucedemo.com/v1/cart.html');
             await cartPage.continueShopping();
-            await productPage.verifyPageLink();
+            await productPage.verifyPageLink(/.*cart/);
         });
     });

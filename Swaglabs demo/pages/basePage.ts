@@ -21,4 +21,16 @@ export class BasePage {
             await selector.nth(0).click();
         }
     }
+
+    async navigate(url: string){
+        await this.page.goto(url);
+    }
+
+    async verifyPageTitle(text: string, title: Locator){
+        await expect(title).toHaveText(text);
+    }
+
+    async verifyPageLink(link: RegExp){
+        await expect(this.page).toHaveURL(link);
+    }
 }
