@@ -56,6 +56,8 @@ export class LoginPage extends BasePage{
             case 'no_password_user':
                 await expect(this.errorMsg).toContainText('Epic sadface: Password is required');
                 break;
+            default:
+                throw new Error('Something went wrong!'); 
             }            
     }
 }
