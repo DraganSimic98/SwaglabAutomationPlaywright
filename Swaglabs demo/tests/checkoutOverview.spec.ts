@@ -6,6 +6,7 @@ import { LoginPage } from "../pages/loginPage";
 import { ProductsPage } from "../pages/productsPage";
 import { SideMenu } from "../pages/sideMenu";
 import { YourCartPage } from "../pages/yourCartPage";
+
 test.describe('Checkout Overview page tests', () => {
     let loginPage: LoginPage;
     let productPage: ProductsPage;
@@ -38,7 +39,7 @@ test.describe('Checkout Overview page tests', () => {
         await productPage.openCart();
         await yourCartPage.verifyPopulatedCart();
         await yourCartPage.goToChekcout();
-        await checkoutPage.verifyPageLink();
+        await checkoutPage.verifyPageLink(/.*checkout-step-one/);
         await checkoutPage.fillTheForm("Miki", "Simic", "35000");
         await checkoutPage.verifyFilledForm();
         await checkoutPage.continueWithOrdering();
@@ -52,14 +53,14 @@ test.describe('Checkout Overview page tests', () => {
         await productPage.openCart();
         await yourCartPage.verifyPopulatedCart();
         await yourCartPage.goToChekcout();
-        await checkoutPage.verifyPageLink();
+        await checkoutPage.verifyPageLink(/.*checkout-step-one/);
         await checkoutPage.fillTheForm("Miki", "Simic", "35000");
         await checkoutPage.verifyFilledForm();
         await checkoutPage.continueWithOrdering();
         await checkoutOverviewPage.verifyPageLink(/.*checkout-step-two/);
         await checkoutOverviewPage.verifyPageTitle("Checkout: Overview", checkoutOverviewPage.lbl_title);
         await checkoutOverviewPage.cancelOrdering();
-        await productPage.verifyPageLink();
+        await productPage.verifyPageLink(/.*inventory/);
         await productPage.verifyPageTitle('Products', productPage.lbl_products);
     }); 
 });

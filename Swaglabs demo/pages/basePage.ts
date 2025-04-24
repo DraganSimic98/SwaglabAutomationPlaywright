@@ -30,7 +30,7 @@ export class BasePage {
      * Method should verify page link
      * @param link link that should be verified
      */
-    async verifyPageLink(link: RegExp){
+    async verifyPageLink(link: string | RegExp){
         await expect(this.page).toHaveURL(link);
     }
 
