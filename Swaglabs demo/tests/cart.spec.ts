@@ -36,7 +36,7 @@ test.describe('Cart', () => {
         test('Go to All Items page', async () => {
             await cartPage.navigate('https://www.saucedemo.com/v1/cart.html');
             await sideMenu.returnToAllItems();
-            await productPage.verifyPageLink(/.*cart/);
+            await productPage.verifyPageLink(/.*inventory/);
         });
 
         test('Check if the cart is empty', async () => {
@@ -55,6 +55,6 @@ test.describe('Cart', () => {
         test('Continue shopping', async () => {
             await cartPage.navigate('https://www.saucedemo.com/v1/cart.html');
             await cartPage.continueShopping();
-            await productPage.verifyPageLink(/.*cart/);
+            await productPage.verifyPageLink(/.*inventory/);
         });
     });

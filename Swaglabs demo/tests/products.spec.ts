@@ -64,7 +64,7 @@ test.describe('Products', () => {
         await sideMenu.verifyClosedMenu();
     });
 
-    test.only('Go to About page', async () => {
+    test('Go to About page', async () => {
         skipAfterEach = true;
         await sideMenu.goToAboutAndVerify();
     });
