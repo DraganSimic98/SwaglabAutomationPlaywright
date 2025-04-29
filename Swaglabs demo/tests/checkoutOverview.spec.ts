@@ -6,6 +6,7 @@ import { LoginPage } from "../pages/loginPage";
 import { ProductsPage } from "../pages/productsPage";
 import { SideMenu } from "../pages/sideMenu";
 import { YourCartPage } from "../pages/yourCartPage";
+import { FinishPage } from "../pages/finishPage";
 
 test.describe('Checkout Overview page tests', () => {
     let loginPage: LoginPage;
@@ -15,6 +16,7 @@ test.describe('Checkout Overview page tests', () => {
     let checkoutOverviewPage: CheckoutOverviewPage;
     let sideMenu: SideMenu;
     let myHelper: MyHelper;
+    let finishPage: FinishPage;
 
     test.beforeEach(async ({page}) => {
         loginPage = new LoginPage(page);
@@ -22,9 +24,10 @@ test.describe('Checkout Overview page tests', () => {
         yourCartPage = new YourCartPage(page);
         checkoutPage = new CheckoutPage(page);
         checkoutOverviewPage = new CheckoutOverviewPage(page);
+        finishPage = new FinishPage(page);
         sideMenu = new SideMenu(page);
         myHelper = new MyHelper();
-        
+
         loginPage.navigate('https://www.saucedemo.com/v1/index.html');
         loginPage.loginWithAnyTypeOfUser(myHelper.standardUsername, myHelper.password);     
     });
@@ -46,6 +49,8 @@ test.describe('Checkout Overview page tests', () => {
         await checkoutOverviewPage.verifyPageLink(/.*checkout-step-two/);
         await checkoutOverviewPage.verifyPageTitle("Checkout: Overview", checkoutOverviewPage.lbl_title);
         await checkoutOverviewPage.finishOrdering();
+        await finishPage.verifyPageLink(/.*checkout-complete/);
+        await finishPage.verifyPageTitle("Finish", finishPage.lbl_title);
     });
 
     test('Cancel ordering', async () => {
@@ -62,5 +67,5 @@ test.describe('Checkout Overview page tests', () => {
         await checkoutOverviewPage.cancelOrdering();
         await productPage.verifyPageLink(/.*inventory/);
         await productPage.verifyPageTitle('Products', productPage.lbl_products);
-    }); 
+    });  
 });

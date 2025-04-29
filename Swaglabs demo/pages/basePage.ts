@@ -10,7 +10,6 @@ export class BasePage {
     }
 
     /** 
-     * Method should redirect user to enterd location
      *  @param url - destination that user should be redirected
     */ 
     async navigate(url: string){
@@ -18,7 +17,6 @@ export class BasePage {
     }
 
     /**
-     * Method should verify page title
      * @param title - title text
      * @param selector - locator of title element
      */
@@ -27,7 +25,6 @@ export class BasePage {
     }
 
     /**
-     * Method should verify page link
      * @param link link that should be verified
      */
     async verifyPageLink(link: string | RegExp){

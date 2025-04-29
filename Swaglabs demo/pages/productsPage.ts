@@ -95,11 +95,6 @@ export class ProductsPage extends BasePage{
         }
     }
 
-    // async verifyPageLink(){
-    //     console.log("ProductsPage, verifyPageLink()");
-    //     await expect(this.page).toHaveURL(/.*inventory/);
-    // }
-
     async openCart(){
         console.log("ProductsPage, openCart()");
         await this.btn_shopingCart.click();
