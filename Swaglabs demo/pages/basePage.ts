@@ -35,6 +35,10 @@ export class BasePage {
         await selector.nth(product).click();
     }
 
+    /**
+     * 
+     * @param selector used to remove items from cart
+     */
     async removeAllProductsFromCart(selector: Locator){
         console.log("YourCartPage, removeProductFromCart()");
         const count = await selector.count();
