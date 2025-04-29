@@ -37,7 +37,8 @@ export class BasePage {
 
     /**
      * 
-     * @param selector used to remove items from cart
+     * @param selector used to target item that should be removed
+     * Method is used to delete all products from cart
      */
     async removeAllProductsFromCart(selector: Locator){
         console.log("YourCartPage, removeProductFromCart()");
