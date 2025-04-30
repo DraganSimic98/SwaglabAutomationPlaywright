@@ -10,22 +10,22 @@ export class BasePage {
     }
 
     /** 
-     *  @param url - destination that user should be redirected
+     *  @param url - destination that user should be redirected.
     */ 
     async navigate(url: string){
         await this.page.goto(url);
     }
 
     /**
-     * @param title - title text
-     * @param selector - locator of title element
+     * @param title - title text.
+     * @param selector - locator of title element.
      */
     async verifyPageTitle(title: string, selector: Locator){
         await expect(selector).toHaveText(title);
     }
 
     /**
-     * @param link link that should be verified
+     * @param link link that should be verified.
      */
     async verifyPageLink(link: string | RegExp){
         await expect(this.page).toHaveURL(link);
@@ -37,7 +37,7 @@ export class BasePage {
 
     /**
      * 
-     * @param selector used to target item that should be removed
+     * @param selector used to target item that should be removed.
      * Method is used to delete all products from cart.
      */
     async removeAllProductsFromCart(selector: Locator){
