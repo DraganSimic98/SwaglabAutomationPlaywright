@@ -18,7 +18,7 @@ export class BasePage {
 
     /**
      * @param title - title text.
-     * @param selector - locator of title element.
+     * @param selector - locator of title element
      */
     async verifyPageTitle(title: string, selector: Locator){
         await expect(selector).toHaveText(title);
