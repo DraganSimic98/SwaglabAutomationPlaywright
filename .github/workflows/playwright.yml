@@ -5,6 +5,7 @@ on:
     paths: 'SwaglabAutomationPlaywright/Swaglabs%20demo'
   pull_request:
     branches: [ main, master ]
+    paths: 'SwaglabAutomationPlaywright/Swaglabs%20demo'
 jobs:
   test:
     timeout-minutes: 60
