@@ -10,7 +10,7 @@ jobs:
         node-version: lts/*
     - name: Run scirpt in subfolder
       working-directory: "Swaglabs demo"
-      run: npm ci
+      run: npm install
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
