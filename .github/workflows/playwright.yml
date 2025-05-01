@@ -11,8 +11,6 @@ jobs:
     - name: Run scirpt in subfolder
       working-directory: "Swaglabs demo"
       run: npm ci
-    - name: Install dependencies
-      run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
