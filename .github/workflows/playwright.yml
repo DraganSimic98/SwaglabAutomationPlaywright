@@ -1,29 +1,25 @@
 name: Playwright Tests
-on:
-  push:
-    branches: [ main, master ]
-    paths: 'SwaglabAutomationPlaywright/Swaglabs%20demo'
-  pull_request:
-    branches: [ main, master ]
-    paths: 'SwaglabAutomationPlaywright/Swaglabs%20demo'
+on: [push]
 jobs:
   test:
-    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
+    - name: Run script in subfolder
+      working-directory: "Swaglabs demo"
+      run: npm install
     - name: Install Playwright Browsers
+      working-directory: "Swaglabs demo"
       run: npx playwright install --with-deps
     - name: Run Playwright tests
+      working-directory: "Swaglabs demo"
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
-        path: playwright-report/
+        path: "Swaglabs demo/playwright-report/"
         retention-days: 30
