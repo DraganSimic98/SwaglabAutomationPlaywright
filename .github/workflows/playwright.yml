@@ -14,7 +14,7 @@ jobs:
       with:
         node-version: lts/*
     - name: Run scirpt in subfolder
-      working-directory: "Swaglabs Demo"
+      working-directory: "Swaglabs demo"
       run: |
         ls
         npm install
