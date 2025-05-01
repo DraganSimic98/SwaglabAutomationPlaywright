@@ -1,4 +1,4 @@
-import test from "playwright/test";
+import { test}  from "@playwright/test";
 import { LoginPage } from "../pages/loginPage";
 import { ProductsPage } from "../pages/productsPage";
 import { YourCartPage } from "../pages/yourCartPage";
