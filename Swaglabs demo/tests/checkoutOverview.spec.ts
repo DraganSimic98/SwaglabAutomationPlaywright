@@ -68,4 +68,19 @@ test.describe('Checkout Overview page tests', () => {
         await productPage.verifyPageLink(/.*inventory/);
         await productPage.verifyPageTitle('Products', productPage.lbl_products);
     });  
+
+    test.only('Check sum of items', async () => {
+        await productPage.addProductToCart(6);
+        await productPage.openCart();
+        await yourCartPage.verifyPopulatedCart();
+        await yourCartPage.goToChekcout();
+        await checkoutPage.verifyPageLink(/.*checkout-step-one/);
+        await checkoutPage.fillTheForm("Miki", "Simic", "35000");
+        await checkoutPage.verifyFilledForm();
+        await checkoutPage.continueWithOrdering();
+        await checkoutOverviewPage.verifyPageLink(/.*checkout-step-two/);
+        await checkoutOverviewPage.verifyPageTitle("Checkout: Overview", checkoutOverviewPage.lbl_title);
+        await checkoutOverviewPage.verifyItemTotal(checkoutOverviewPage.lbl_itemTotal, await checkoutOverviewPage.sumOfItems());
+        await checkoutOverviewPage.verifyItemTotal(checkoutOverviewPage.lbl_total, await checkoutOverviewPage.sumOfTaxandItemTotal());
+    });
 });
