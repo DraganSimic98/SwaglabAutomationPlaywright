@@ -69,7 +69,7 @@ test.describe('Checkout Overview page tests', () => {
         await productPage.verifyPageTitle('Products', productPage.lbl_products);
     });  
 
-    test.only('Check sum of items', async () => {
+    test('Check sum of items', async () => {
         await productPage.addProductToCart(6);
         await productPage.openCart();
         await yourCartPage.verifyPopulatedCart();
