@@ -28,8 +28,8 @@ test.describe('Finish page tests', () => {
             sideMenu = new SideMenu(page);
             myHelper = new MyHelper();
     
-            loginPage.navigate('https://www.saucedemo.com/v1/index.html');
-            loginPage.loginWithAnyTypeOfUser(myHelper.standardUsername, myHelper.password);     
+            await loginPage.navigate('https://www.saucedemo.com/v1/index.html');
+            await loginPage.loginWithAnyTypeOfUser(myHelper.standardUsername, myHelper.password);     
         });
 
         test.afterEach(async () => {
