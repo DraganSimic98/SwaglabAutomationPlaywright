@@ -11,8 +11,6 @@ export class CheckoutOverviewPage extends BasePage{
     readonly lbl_itemTax: Locator;
     readonly lbl_total: Locator;
 
- 
-
     constructor(page: Page){
         super(page);
         this.page = page;

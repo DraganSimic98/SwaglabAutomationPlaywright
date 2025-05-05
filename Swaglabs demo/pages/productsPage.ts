@@ -110,4 +110,4 @@ export class ProductsPage extends BasePage{
         let count = selector.innerText();
         return count;
     }
-}
+} 
