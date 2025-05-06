@@ -9,6 +9,11 @@ export class MyHelper{
     readonly wrongPassword: string;
     readonly noPassword: string;
     readonly noUsernamePassword: string;
+     user = {
+        first_name: "Milorad",
+        last_name: "Simic",
+        zip: "35000"
+     }
 
     constructor(){
         this.standardUsername = "standard_user";

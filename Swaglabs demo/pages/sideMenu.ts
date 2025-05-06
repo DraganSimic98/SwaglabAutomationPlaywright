@@ -46,6 +46,11 @@ export class SideMenu{
         await expect(this.left_menu).toBeVisible();
     }
     
+    /**
+     * 
+     * @param option - 'cross' options used to click on X button
+     * @param option - 'randomClick' option used to click on radnom element on screen
+     */
     async closeLeftMenu(option: 'cross' | 'randomClick'){
         console.log("Side Menu, closeLeftMenu()");
         if(option === 'cross'){

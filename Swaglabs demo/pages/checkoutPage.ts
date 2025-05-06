@@ -33,6 +33,12 @@ export class CheckoutPage extends BasePage{
         await this.btn_cancel.click();
     }
 
+    /**
+     * 
+     * @param firstName - first name of user that will be used in test
+     * @param lastName - last name of user that will be used in test
+     * @param zip - zip of user town that will be used in test
+     */
     async fillTheForm(firstName: string, lastName: string, zip: string){
         console.log("CheckoutPage, fillTheForm()");
         await this.input_firstName.fill(firstName);

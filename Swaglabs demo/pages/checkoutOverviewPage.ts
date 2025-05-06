@@ -58,15 +58,20 @@ export class CheckoutOverviewPage extends BasePage{
       return value + parseFloat((await this.sumOfItems()).toFixed(2));
     }
 
+    /**
+     * 
+     * @param selector - element which will be used for total
+     * @param sum - sum present the method which will be used to compare with final result of this method
+     */
     async verifyItemTotal(selector: Locator , sum: number){
         console.log("Verify item total");
         const total = await selector.allTextContents();
-        let value = 0;
+        let finalTotal = 0;
 
-        for(const it  of total){
+        for(const it of total){
         const clenaed = parseFloat(it.replace(/[^0-9.-]+/g, ''));
-        value = value+clenaed;
+        finalTotal = finalTotal + clenaed;
       }
-      expect(value).toEqual(sum);
+      expect(finalTotal).toEqual(sum);
     }
 }

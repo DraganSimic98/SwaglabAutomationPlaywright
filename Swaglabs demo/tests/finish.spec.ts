@@ -43,7 +43,7 @@ test.describe('Finish page tests', () => {
             await yourCartPage.verifyPopulatedCart();
             await yourCartPage.goToChekcout();
             await checkoutPage.verifyPageLink(/.*checkout-step-one/);
-            await checkoutPage.fillTheForm("Miki", "Simic", "35000");
+            await checkoutPage.fillTheForm(myHelper.user.first_name, myHelper.user.last_name, myHelper.user.zip);
             await checkoutPage.verifyFilledForm();
             await checkoutPage.continueWithOrdering();
             await checkoutOverviewPage.verifyPageLink(/.*checkout-step-two/);

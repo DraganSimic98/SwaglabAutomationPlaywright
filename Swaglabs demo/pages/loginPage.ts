@@ -24,6 +24,11 @@ export class LoginPage extends BasePage{
         this.productName = page.locator('//div[@class="inventory_details_name"]');
     }
 
+    /**
+     * 
+     * @param username - username of user account that will be used to login
+     * @param password - password of user account that will be used to login
+     */
     async loginWithAnyTypeOfUser(username: string, password: string){
         console.log("LoginPage, loginWithAnyTypeOfUser()");
                
@@ -33,6 +38,11 @@ export class LoginPage extends BasePage{
         await this.expectedResult(username);   
     }
 
+    /**
+     * 
+     * @param username - a different usernames that will be used in switch method for login in
+     *                   purpose to cause a different errors while logging
+     */
     async expectedResult(username: string){
         console.log("LoginPage, expectedResult()");
         

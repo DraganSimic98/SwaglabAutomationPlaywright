@@ -100,6 +100,10 @@ export class ProductsPage extends BasePage{
         await this.btn_shopingCart.click();
     }
 
+    /**
+     * 
+     * @param addItem - a number of items that will be added in cart
+     */
     async addProductToCart(addItem: number){
         console.log("ProductsPage, addProductToCart");
         for(let i = 1; i <= addItem; i++)
