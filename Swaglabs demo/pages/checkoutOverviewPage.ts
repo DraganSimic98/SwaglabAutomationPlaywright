@@ -52,7 +52,7 @@ export class CheckoutOverviewPage extends BasePage{
         let value = 0;
 
         for(const it  of tax){
-        const clenaed = parseFloat(it.replace('Tax: $', ''))
+        const clenaed = parseFloat(it.replace('Tax: $', ''));
         value = value+clenaed;
       }
       return value + parseFloat((await this.sumOfItems()).toFixed(2));
@@ -64,7 +64,7 @@ export class CheckoutOverviewPage extends BasePage{
         let value = 0;
 
         for(const it  of total){
-        const clenaed = parseFloat(it.replace(/[^0-9.-]+/g, ''))
+        const clenaed = parseFloat(it.replace(/[^0-9.-]+/g, ''));
         value = value+clenaed;
       }
       expect(value).toEqual(sum);
