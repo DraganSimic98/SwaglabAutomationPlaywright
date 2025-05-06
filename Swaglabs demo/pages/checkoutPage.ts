@@ -53,7 +53,7 @@ export class CheckoutPage extends BasePage{
             await expect(this.input_lastName).not.toBeEmpty();
             await expect(this.input_postalCode).not.toBeEmpty();
         }catch(e){
-            console.log('Error', e);          
+            console.log('Error, one of fields are empty', e);          
         }
     }
 

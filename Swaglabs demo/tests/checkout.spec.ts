@@ -55,6 +55,7 @@ test.describe('Checkout page tests', () => {
         await checkoutPage.verifyPageLink(/.*checkout-step-one/);
         await checkoutPage.verifyPageTitle('Checkout: Your Information', checkoutPage.lbl_subheader);
         await checkoutPage.fillTheForm("", myHelper.user.last_name, myHelper.user.zip);
+        await checkoutPage.verifyFilledForm();
         await checkoutPage.continueWithOrdering();
         await checkoutPage.verifyErrorMesseege();
     });
@@ -67,6 +68,7 @@ test.describe('Checkout page tests', () => {
         await checkoutPage.verifyPageLink(/.*checkout-step-one/);
         await checkoutPage.verifyPageTitle('Checkout: Your Information', checkoutPage.lbl_subheader);
         await checkoutPage.fillTheForm(myHelper.user.first_name, "", myHelper.user.zip);
+        await checkoutPage.verifyFilledForm();
         await checkoutPage.continueWithOrdering();
         await checkoutPage.verifyErrorMesseege();
     });
@@ -78,6 +80,7 @@ test.describe('Checkout page tests', () => {
         await yourCartPage.goToChekcout();
         await checkoutPage.verifyPageLink(/.*checkout-step-one/);
         await checkoutPage.fillTheForm(myHelper.user.first_name, myHelper.user.last_name, "");
+        await checkoutPage.verifyFilledForm();
         await checkoutPage.continueWithOrdering();
         await checkoutPage.verifyErrorMesseege();
     });
