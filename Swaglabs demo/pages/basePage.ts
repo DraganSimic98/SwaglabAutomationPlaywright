@@ -13,6 +13,7 @@ export class BasePage {
      *  @param url - destination that user should be redirected.
     */ 
     async navigate(url: string){
+        console.log("BasePage, navigate()");
         await this.page.goto(url);
     }
 
@@ -21,6 +22,7 @@ export class BasePage {
      * @param selector - locator of title element
      */
     async verifyPageTitle(title: string, selector: Locator){
+        console.log("BasePage, verifyPageTitle()");
         await expect(selector).toHaveText(title);
     }
 
@@ -28,10 +30,12 @@ export class BasePage {
      * @param link link that should be verified.
      */
     async verifyPageLink(link: string | RegExp){
+        console.log("BasePage, verifyPageLink()");
         await expect(this.page).toHaveURL(link);
     }
 
     async removeOneProduct(selector:Locator, product: number){
+        console.log("BasePage, removeOneProduct()");
         await selector.nth(product).click();
     }
 
@@ -41,7 +45,7 @@ export class BasePage {
      * Method is used to delete all products from cart.
      */
     async removeAllProductsFromCart(selector: Locator){
-        console.log("YourCartPage, removeProductFromCart()");
+        console.log("BasePage, removeProductFromCart()");
         const count = await selector.count();
         
         for(let i = 0; i < count; i++){

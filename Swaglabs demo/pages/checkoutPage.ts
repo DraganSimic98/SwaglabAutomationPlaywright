@@ -19,7 +19,7 @@ export class CheckoutPage extends BasePage{
         this.page = page;
         this.lbl_subheader = page.locator('//div[@class="subheader"]');
         this.btn_cancel = page.locator('//a[@class="cart_cancel_link btn_secondary"]');
-        this.btn_continue = page.locator('//input[@value="CONTINUE"]')
+        this.btn_continue = page.locator('//input[@value="CONTINUE"]');
         this.input_firstName = page.locator('#first-name');
         this.input_lastName = page.locator('#last-name');
         this.input_postalCode = page.locator('#postal-code');
@@ -65,10 +65,9 @@ export class CheckoutPage extends BasePage{
     async verifyErrorMesseege(){
         console.log("CheckoutPage, verifyErrorMesseege()");
         
-        const firstName = await this.input_firstName.inputValue()
-        const lastName = await this.input_lastName.inputValue()
-        const postalCode = await this.input_postalCode.inputValue()
-        console.log(firstName, lastName, postalCode);
+        const firstName = await this.input_firstName.inputValue();
+        const lastName = await this.input_lastName.inputValue();
+        const postalCode = await this.input_postalCode.inputValue();
         
         if(firstName === ""){
             await expect(this.errMsg_firstName).toBeVisible();

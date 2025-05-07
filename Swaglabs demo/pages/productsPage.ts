@@ -101,7 +101,6 @@ export class ProductsPage extends BasePage{
     }
 
     /**
-     * 
      * @param addItem - a number of items that will be added in cart
      */
     async addProductToCart(addItem: number){
@@ -110,6 +109,10 @@ export class ProductsPage extends BasePage{
             await this.page.locator(`//div[@id="inventory_container"]/div/div[${i}]/div[3]/button`).click();   
     }
 
+    /**
+     * 
+     * In progress
+     */
     async cartItemCounter(selector: Locator){
         let count = selector.innerText();
         return count;
